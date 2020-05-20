@@ -81,18 +81,64 @@ def merge_sort(arr):
 
 
 # implement an in-place merge sort algorithm
+
+
 def merge_in_place(arr, start, mid, end):
-    # Your code here
-
-
+    start2 = mid + 1
+    #base case: if the array is already sorted
+    if (arr[mid] <= arr[start2]): 
+        return
+    while (start <= mid and start2 <= end): #sets the pointers for the values to sort each other
+        if (arr[start] <= arr[start2]): 
+            start += 1
+        else: 
+            value = arr[start2]
+            index = start2
+            while (index != start): #shifts all the values over each other by 1
+                arr[index] = arr[index - 1] 
+                index -= 1
+            arr[start] = value
+            #increment the pointers to the next value
+            start += 1
+            mid += 1
+            start2 += 1
     return arr
 
+# def merge_in_place(arr, start, mid, end):
+#     # Your code here
+#     L = arr[start:mid]
+#     R = arr[mid:end]
+#     i = 0
+#     j = 0
+#     k = start
+#     for l in range (k, end):
+#         if j >= len(R) or (i < len(L) and L[i] < R[j]):
+#             arr[l] = L[i]
+#             i = i + 1
+#         else: 
+#             arr[l] = R[j]
+#             j = j + 1
+
+#     return arr
 
 def merge_sort_in_place(arr, l, r):
     # Your code here
-
-
+    if (l < r): 
+        m = l + (r - l) // 2
+        merge_sort_in_place(arr, l, m)
+        merge_sort_in_place(arr, m + 1, r)
+        merge_in_place(arr, l, m, r)
     return arr
+
+# def merge_sort_in_place(arr, l, r):
+#     # Your code here
+#     if r - l > 1: 
+#         mid = int((l + r) / 2)
+#         merge_sort_in_place(arr, l, mid)
+#         merge_sort_in_place(arr, mid, r)
+#         merge_in_place(arr, l, mid, r)
+
+#     return arr
 
 
 # STRETCH: implement the Timsort function below
